@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlayerX.Views.VideoPage"
+             xmlns:local="clr-namespace:PlayerX.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Videos">
+    
+    <!--<toolkit:MediaElement Background="black" 
+                          x:Name="MediaVideo"
+                      Grid.Row="3" Grid.Column="2" 
+                      ShouldAutoPlay="False"
+                      ShouldShowPlaybackControls="True"
+                      HeightRequest="300"
+                      WidthRequest="400"
+                      />-->
+    <ContentPage.BindingContext>
+        <local:VideoViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="40" />
+        </Grid.ColumnDefinitions>
+
+        <ListView BackgroundColor="Transparent"
+                  CachingStrategy="RecycleElement"
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding Folders}"
+                  SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
+                  Grid.Row="1" Grid.Column="1">
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior 
+                    EventName="ItemTapped"
+                    Command="{Binding SelectedCommand}"
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                />
+            </ListView.Behaviors>
+
+        </ListView>
+
+
+    </Grid>
+
+</ContentPage>

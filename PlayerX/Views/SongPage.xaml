@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlayerX.Views.SongPage"
+             xmlns:local="clr-namespace:PlayerX.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             
+             >
+    
+    
+    <ContentPage.BindingContext>
+        <local:SongsViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="40" />
+        </Grid.ColumnDefinitions>
+
+        <ListView BackgroundColor="Transparent"
+                  CachingStrategy="RecycleElement"
+                  HasUnevenRows="True"
+                ItemsSource="{Binding MyMusicInfo}" 
+                SelectedItem="{Binding SelectedSong, Mode=TwoWay}"
+                  Grid.Row="1" Grid.Column="1">
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior 
+                    EventName="ItemTapped"
+                    Command="{Binding SelectedCommand}"
+                                                
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding SongName}"
+                      Detail="{ Binding Artist }" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        
+    </Grid>
+</ContentPage>

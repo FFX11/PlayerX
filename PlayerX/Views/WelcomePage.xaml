@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlayerX.Views.WelcomePage" BackgroundColor="BlueViolet"
+             Title="Welcome">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        
+        
+        <Label Grid.Row="1" Grid.Column="1" FontSize="44" TextColor="yellow"
+            Text="Welcome!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Button  Grid.Row="2" Grid.Column="1" 
+            FontSize="33" BorderWidth="3" BackgroundColor="orange"  Text="Grant access to songs" Clicked="Button_Clicked"  />
+    </Grid>
+        
+        
+    
+</ContentPage>

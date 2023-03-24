@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlayerX.Views.FolderSongsPage"
+             xmlns:viewmodel="clr-namespace:PlayerX.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+             BackgroundColor="DarkGrey"
+              >
+
+    <ContentPage.BindingContext>
+        <viewmodel:FolderSongsViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+        </Grid.ColumnDefinitions>
+        
+        <ListView Grid.Column="1" Grid.Row="1" BackgroundColor="Gainsboro"
+                  CachingStrategy="RecycleElement"
+                  HasUnevenRows="False" 
+                  ItemsSource="{Binding SongsList}"
+                  SelectedItem="{Binding SelectedSong, Mode=TwoWay}">
+
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior 
+                    EventName="ItemTapped"
+                    Command="{Binding SelectedCommand}"
+                                                
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Grid.Column="1" Grid.Row="2" Text="{Binding Artist}"
+                     Detail="{ Binding SongName }" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="PlayerX.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:PlayerX"
+    xmlns:viewmodel="clr-namespace:PlayerX.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent IsVisible="True" ContentTemplate="{DataTemplate viewmodel:WelcomePage}" />
+    
+    <TabBar>
+        
+        <Tab Title="Folders"
+            Icon="folders.png">
+            <ShellContent  ContentTemplate="{DataTemplate viewmodel:FoldersPage}" />
+        </Tab>
+
+        <Tab Title="Songs" 
+            Icon="songs.png">
+            <ShellContent  ContentTemplate="{DataTemplate viewmodel:SongPage}" />
+        </Tab>
+        <Tab Title="Videos"
+            Icon="videos.png">
+            <ShellContent  ContentTemplate="{DataTemplate viewmodel:VideoPage}" />
+        </Tab>
+    </TabBar>
+
+</Shell>
